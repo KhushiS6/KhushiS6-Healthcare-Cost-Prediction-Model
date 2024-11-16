@@ -16,21 +16,33 @@ model = joblib.load('healthcare_cost_prediction_model.joblib')
 scaler = joblib.load('scaler.joblib')
 label_encoders = joblib.load('label_encoders.joblib')
 
-# Title and inputs
-st.title("Healthcare Cost Prediction App")
-st.write("Enter the healthcare details below to get a cost prediction for the patient's outcome.")
+# Set page title and layout
+st.set_page_config(page_title="Healthcare Cost Prediction", layout="wide")
 
-# Inputs for each feature
-hospital = st.selectbox("Hospital", label_encoders['Hospital'].classes_)
-age = st.number_input("Age", min_value=0)
-length_of_stay = st.number_input("Length of Stay", min_value=0)
-blood_type = st.selectbox("Blood Type", label_encoders['Blood Type'].classes_)
-medical_condition = st.selectbox("Medical Condition", label_encoders['Medical Condition'].classes_)
-insurance_provider = st.selectbox("Insurance Provider", label_encoders['Insurance Provider'].classes_)
-medication = st.selectbox("Medication", label_encoders['Medication'].classes_)
-admission_type = st.selectbox("Admission Type", label_encoders['Admission Type'].classes_)
-test_results = st.selectbox("Test Results", label_encoders['Test Results'].classes_)
-gender = st.selectbox("Gender", label_encoders['Gender'].classes_)
+# Header
+st.markdown("# Healthcare Cost Prediction App", unsafe_allow_html=True)
+st.markdown("""
+    **Developed by Khushi**  
+    Predict healthcare costs based on patient profiles and admission details.
+    """, unsafe_allow_html=True)
+
+# Inputs for each feature in a more visually organized form
+with st.form("prediction_form"):
+    st.subheader("Enter Patient Details")
+    
+    hospital = st.selectbox("Hospital", label_encoders['Hospital'].classes_)
+    age = st.number_input("Age", min_value=0)
+    length_of_stay = st.number_input("Length of Stay (days)", min_value=0)
+    blood_type = st.selectbox("Blood Type", label_encoders['Blood Type'].classes_)
+    medical_condition = st.selectbox("Medical Condition", label_encoders['Medical Condition'].classes_)
+    insurance_provider = st.selectbox("Insurance Provider", label_encoders['Insurance Provider'].classes_)
+    medication = st.selectbox("Medication", label_encoders['Medication'].classes_)
+    admission_type = st.selectbox("Admission Type", label_encoders['Admission Type'].classes_)
+    test_results = st.selectbox("Test Results", label_encoders['Test Results'].classes_)
+    gender = st.selectbox("Gender", label_encoders['Gender'].classes_)
+
+    # Submit button for prediction
+    submit_button = st.form_submit_button(label="Predict Healthcare Cost")
 
 # Prepare inputs for prediction
 inputs = np.array([
@@ -49,7 +61,53 @@ inputs = np.array([
 # Scale numerical features
 inputs[:, 1:3] = scaler.transform(inputs[:, 1:3])
 
-# Predict outcome
-if st.button("Predict Outcome"):
+# Display prediction if button is pressed
+if submit_button:
     prediction = model.predict(inputs)
-    st.write(f"Predicted Outcome: {prediction[0]:.2f}")
+    st.markdown(f"### Predicted Healthcare Cost: ${prediction[0]:,.2f}", unsafe_allow_html=True)
+
+    # Show a feedback or comment section
+    st.markdown("""
+    ## We Value Your Feedback!
+    If you have any suggestions or comments, please let us know:
+    """, unsafe_allow_html=True)
+    
+    feedback = st.text_area("Enter your feedback or comments here:")
+    if st.button("Submit Feedback"):
+        if feedback:
+            st.success("Thank you for your feedback!")
+        else:
+            st.warning("Please enter some feedback before submitting.")
+
+# Add a section with a button that links to Khushi's GitHub
+st.markdown("## About the Developer")
+st.markdown("""
+    The app is developed by [Khushi](https://github.com/KhushiS6).
+    You can find more of her work and contribute to the projects via her GitHub profile.
+""", unsafe_allow_html=True)
+
+# GitHub Link Button
+if st.button("Visit GitHub Profile"):
+    js = "window.open('https://github.com/KhushiS6', '_blank')"
+    st.markdown(f'<a href="javascript:{js}"><button class="stButton">Go to GitHub</button></a>', unsafe_allow_html=True)
+
+# Customize app styling (optional)
+st.markdown(
+    """
+    <style>
+    .stButton {
+        background-color: #4CAF50;
+        color: white;
+        font-size: 16px;
+        padding: 12px 28px;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+        text-align: center;
+    }
+    .stButton:hover {
+        background-color: #45a049;
+    }
+    </style>
+    """, unsafe_allow_html=True
+)

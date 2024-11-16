@@ -31,39 +31,39 @@ st.markdown("""
 with st.form("prediction_form"):
     st.subheader("Enter Patient Details")
     
-    hospital = st.selectbox("Hospital", label_encoders['Hospital'].classes_, index=0, key="hospital", help="Select the hospital name", format_func=lambda x: x, index_color="lightblue")
+    hospital = st.selectbox("Hospital", label_encoders['Hospital'].classes_, index=0, help="Select the hospital name", key="hospital")
     age = st.number_input("Age", min_value=0, max_value=120)
     length_of_stay = st.number_input("Length of Stay (days)", min_value=0, max_value=365)
-    blood_type = st.selectbox("Blood Type", label_encoders['Blood Type'].classes_, index=0, key="blood_type", help="Select blood type", index_color="lightgreen")
-    medical_condition = st.selectbox("Medical Condition", label_encoders['Medical Condition'].classes_, index=0, key="medical_condition", help="Select medical condition", index_color="lightcoral")
-    insurance_provider = st.selectbox("Insurance Provider", label_encoders['Insurance Provider'].classes_, index=0, key="insurance_provider", help="Select insurance provider", index_color="lightyellow")
-    medication = st.selectbox("Medication", label_encoders['Medication'].classes_, index=0, key="medication", help="Select medication", index_color="lightblue")
-    admission_type = st.selectbox("Admission Type", label_encoders['Admission Type'].classes_, index=0, key="admission_type", help="Select admission type", index_color="lightgreen")
-    test_results = st.selectbox("Test Results", label_encoders['Test Results'].classes_, index=0, key="test_results", help="Select test results", index_color="lightcoral")
-    gender = st.selectbox("Gender", label_encoders['Gender'].classes_, index=0, key="gender", help="Select gender", index_color="lightyellow")
+    blood_type = st.selectbox("Blood Type", label_encoders['Blood Type'].classes_, index=0, key="blood_type")
+    medical_condition = st.selectbox("Medical Condition", label_encoders['Medical Condition'].classes_, index=0, key="medical_condition")
+    insurance_provider = st.selectbox("Insurance Provider", label_encoders['Insurance Provider'].classes_, index=0, key="insurance_provider")
+    medication = st.selectbox("Medication", label_encoders['Medication'].classes_, index=0, key="medication")
+    admission_type = st.selectbox("Admission Type", label_encoders['Admission Type'].classes_, index=0, key="admission_type")
+    test_results = st.selectbox("Test Results", label_encoders['Test Results'].classes_, index=0, key="test_results")
+    gender = st.selectbox("Gender", label_encoders['Gender'].classes_, index=0, key="gender")
 
-    # Submit button for prediction
+    # Add a submit button for the form
     submit_button = st.form_submit_button(label="Predict Healthcare Cost")
 
 # Prepare inputs for prediction
-inputs = np.array([
-    label_encoders['Hospital'].transform([hospital])[0],
-    age,
-    length_of_stay,
-    label_encoders['Blood Type'].transform([blood_type])[0],
-    label_encoders['Medical Condition'].transform([medical_condition])[0],
-    label_encoders['Insurance Provider'].transform([insurance_provider])[0],
-    label_encoders['Medication'].transform([medication])[0],
-    label_encoders['Admission Type'].transform([admission_type])[0],
-    label_encoders['Test Results'].transform([test_results])[0],
-    label_encoders['Gender'].transform([gender])[0]
-]).reshape(1, -1)
-
-# Scale numerical features
-inputs[:, 1:3] = scaler.transform(inputs[:, 1:3])
-
-# Display prediction if button is pressed
 if submit_button:
+    inputs = np.array([
+        label_encoders['Hospital'].transform([hospital])[0],
+        age,
+        length_of_stay,
+        label_encoders['Blood Type'].transform([blood_type])[0],
+        label_encoders['Medical Condition'].transform([medical_condition])[0],
+        label_encoders['Insurance Provider'].transform([insurance_provider])[0],
+        label_encoders['Medication'].transform([medication])[0],
+        label_encoders['Admission Type'].transform([admission_type])[0],
+        label_encoders['Test Results'].transform([test_results])[0],
+        label_encoders['Gender'].transform([gender])[0]
+    ]).reshape(1, -1)
+
+    # Scale numerical features
+    inputs[:, 1:3] = scaler.transform(inputs[:, 1:3])
+
+    # Display prediction result
     prediction = model.predict(inputs)
     st.markdown(f"### Predicted Healthcare Cost: ${prediction[0]:,.2f}", unsafe_allow_html=True)
 
@@ -72,12 +72,13 @@ if submit_button:
     ## We Value Your Feedback! ✍️  
     Please leave your comments or suggestions to help improve this app.
     """, unsafe_allow_html=True)
-    
+
+    # Collect feedback
     feedback = st.text_area("Enter your feedback or comments here:", height=150)
-    
+
+    # Submit feedback button
     if st.button("Submit Feedback"):
         if feedback:
-            # Saving the feedback (just showing success for now, it can be extended to store the data)
             st.success("Thank you for your valuable feedback!")
         else:
             st.warning("Please enter some feedback before submitting.")

@@ -93,26 +93,33 @@ st.markdown("""
 # GitHub Link Button with proper link behavior (opens in new tab)
 st.markdown("""
     <a href="https://github.com/KhushiS6" target="_blank">
-        <button style="background-color: #2D9CDB; color: white; font-size: 18px; padding: 14px 28px; border: none; border-radius: 8px; cursor: pointer; width: 100%; text-align: center;">
+        <button style="background-color: #2D9CDB; color: white; font-size: 14px; padding: 10px 20px; border: none; border-radius: 8px; cursor: pointer; text-align: center;">
             Go to GitHub Profile
         </button>
     </a>
+""", unsafe_allow_html=True)
+
+# Smaller Submit Feedback Button
+st.markdown("""
+    <button style="background-color: #56CCF2; color: white; font-size: 14px; padding: 8px 16px; border: none; border-radius: 8px; cursor: pointer;">
+        Submit Feedback
+    </button>
 """, unsafe_allow_html=True)
 
 # Customize app styling (optional)
 st.markdown(
     """
     <style>
-    /* Styling the 'Go to GitHub' button */
+    /* Smaller 'Go to GitHub' button */
     .stButton {
         background-color: #2D9CDB;
         color: white;
-        font-size: 18px;
-        padding: 14px 28px;
+        font-size: 14px;
+        padding: 10px 20px;
         border: none;
         cursor: pointer;
         border-radius: 8px;
-        width: 100%;
+        width: auto;
         text-align: center;
         box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
         transition: all 0.3s ease;
@@ -121,58 +128,19 @@ st.markdown(
         background-color: #1F77B4;
     }
 
-    /* Styling the input and feedback area */
-    .stTextInput textarea {
-        font-size: 16px;
-        padding: 12px;
-        border-radius: 8px;
-        width: 100%;
-        box-sizing: border-box;
-        border: 1px solid #ddd;
-        margin-bottom: 15px;
-    }
-    .stTextInput label {
-        font-weight: bold;
-    }
-
-    /* Styling the title and headers */
-    h1, h2, h3 {
-        font-family: 'Roboto', sans-serif;
-        color: #2c3e50;
-    }
-
-    h1 {
-        font-size: 32px;
-        margin-bottom: 10px;
-    }
-
-    h2, h3 {
-        font-size: 24px;
-        margin-bottom: 5px;
-    }
-
-    .stText {
-        font-size: 18px;
-        font-weight: normal;
-        color: #7f8c8d;
-    }
-
-    /* Custom button for 'Go to GitHub' */
+    /* Smaller 'Submit Feedback' button */
     .stButton {
-        background-color: #2D9CDB;
+        background-color: #56CCF2;
         color: white;
-        font-size: 18px;
-        padding: 14px 28px;
+        font-size: 14px;
+        padding: 8px 16px;
         border-radius: 8px;
+        width: auto;
         text-align: center;
         cursor: pointer;
-        border: none;
-        width: 100%;
-        transition: background-color 0.3s ease;
     }
-
     .stButton:hover {
-        background-color: #1F77B4;
+        background-color: #4C8FD6;
     }
     </style>
     """, unsafe_allow_html=True

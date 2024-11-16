@@ -21,10 +21,8 @@ st.set_page_config(page_title="Healthcare Cost Prediction", layout="wide", page_
 
 # Header and description with icons
 st.markdown("# Healthcare Cost Prediction App 🏥", unsafe_allow_html=True)
-st.markdown("""
-    **Developed by Khushi**  
-    Predict healthcare costs based on patient profiles and admission details.  
-    This app uses advanced machine learning models to estimate the healthcare cost, so you can make informed decisions.
+st.markdown("""  
+    Predict healthcare costs based on patient profiles and admission details.
     """, unsafe_allow_html=True)
 
 # Input form for patient details

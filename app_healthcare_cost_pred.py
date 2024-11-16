@@ -99,13 +99,6 @@ st.markdown("""
     </a>
 """, unsafe_allow_html=True)
 
-# Smaller Submit Feedback Button
-st.markdown("""
-    <button style="background-color: #56CCF2; color: white; font-size: 14px; padding: 8px 16px; border: none; border-radius: 8px; cursor: pointer;">
-        Submit Feedback
-    </button>
-""", unsafe_allow_html=True)
-
 # Customize app styling (optional)
 st.markdown(
     """

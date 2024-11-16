@@ -90,10 +90,14 @@ st.markdown("""
     You can find more of her work and contribute to her projects via her GitHub profile.
 """, unsafe_allow_html=True)
 
-# GitHub Link Button with better styling and colors
-if st.button("Visit GitHub Profile"):
-    js = "window.open('https://github.com/KhushiS6')"
-    st.markdown(f'<a href="javascript:{js}"><button class="stButton">Go to GitHub Profile</button></a>', unsafe_allow_html=True)
+# GitHub Link Button with proper link behavior (opens in new tab)
+st.markdown("""
+    <a href="https://github.com/KhushiS6" target="_blank">
+        <button style="background-color: #2D9CDB; color: white; font-size: 18px; padding: 14px 28px; border: none; border-radius: 8px; cursor: pointer; width: 100%; text-align: center;">
+            Go to GitHub Profile
+        </button>
+    </a>
+""", unsafe_allow_html=True)
 
 # Customize app styling (optional)
 st.markdown(

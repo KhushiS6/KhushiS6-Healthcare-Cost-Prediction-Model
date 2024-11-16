@@ -16,23 +16,24 @@ model = joblib.load('healthcare_cost_prediction_model.joblib')
 scaler = joblib.load('scaler.joblib')
 label_encoders = joblib.load('label_encoders.joblib')
 
-# Set page title and layout
-st.set_page_config(page_title="Healthcare Cost Prediction", layout="wide")
+# Set page title, icon, and layout
+st.set_page_config(page_title="Healthcare Cost Prediction", layout="wide", page_icon="🩺")
 
-# Header
-st.markdown("# Healthcare Cost Prediction App", unsafe_allow_html=True)
+# Header and description with icons
+st.markdown("# Healthcare Cost Prediction App 🏥", unsafe_allow_html=True)
 st.markdown("""
     **Developed by Khushi**  
-    Predict healthcare costs based on patient profiles and admission details.
+    Predict healthcare costs based on patient profiles and admission details.  
+    This app uses advanced machine learning models to estimate the healthcare cost, so you can make informed decisions.
     """, unsafe_allow_html=True)
 
-# Inputs for each feature in a more visually organized form
+# Input form for patient details
 with st.form("prediction_form"):
     st.subheader("Enter Patient Details")
     
     hospital = st.selectbox("Hospital", label_encoders['Hospital'].classes_)
-    age = st.number_input("Age", min_value=0)
-    length_of_stay = st.number_input("Length of Stay (days)", min_value=0)
+    age = st.number_input("Age", min_value=0, max_value=120)
+    length_of_stay = st.number_input("Length of Stay (days)", min_value=0, max_value=365)
     blood_type = st.selectbox("Blood Type", label_encoders['Blood Type'].classes_)
     medical_condition = st.selectbox("Medical Condition", label_encoders['Medical Condition'].classes_)
     insurance_provider = st.selectbox("Insurance Provider", label_encoders['Insurance Provider'].classes_)
@@ -66,24 +67,25 @@ if submit_button:
     prediction = model.predict(inputs)
     st.markdown(f"### Predicted Healthcare Cost: ${prediction[0]:,.2f}", unsafe_allow_html=True)
 
-    # Show a feedback or comment section
+    # Feedback section after prediction
     st.markdown("""
-    ## We Value Your Feedback!
-    If you have any suggestions or comments, please let us know:
+    ## We Value Your Feedback! ✍️  
+    Please leave your comments or suggestions to help improve this app.
     """, unsafe_allow_html=True)
     
-    feedback = st.text_area("Enter your feedback or comments here:")
+    feedback = st.text_area("Enter your feedback or comments here:", height=150)
+    
     if st.button("Submit Feedback"):
         if feedback:
-            st.success("Thank you for your feedback!")
+            st.success("Thank you for your valuable feedback!")
         else:
             st.warning("Please enter some feedback before submitting.")
 
 # Add a section with a button that links to Khushi's GitHub
-st.markdown("## About the Developer")
+st.markdown("## About the Developer 💻")
 st.markdown("""
-    The app is developed by [Khushi](https://github.com/KhushiS6).
-    You can find more of her work and contribute to the projects via her GitHub profile.
+    The app is developed by [Khushi](https://github.com/KhushiS6).  
+    You can find more of her work and contribute to her projects via her GitHub profile.
 """, unsafe_allow_html=True)
 
 # GitHub Link Button
@@ -104,9 +106,23 @@ st.markdown(
         cursor: pointer;
         border-radius: 5px;
         text-align: center;
+        transition: background-color 0.3s;
     }
     .stButton:hover {
         background-color: #45a049;
+    }
+    .stTextInput textarea {
+        font-size: 16px;
+        padding: 10px;
+        border-radius: 5px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+    .stTextInput label {
+        font-weight: bold;
+    }
+    .stText {
+        font-size: 18px;
     }
     </style>
     """, unsafe_allow_html=True

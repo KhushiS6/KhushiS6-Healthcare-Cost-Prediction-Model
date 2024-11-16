@@ -31,16 +31,17 @@ st.markdown("""
 with st.form("prediction_form"):
     st.subheader("Enter Patient Details")
     
-    hospital = st.selectbox("Hospital", label_encoders['Hospital'].classes_, index=0, help="Select the hospital name", key="hospital")
-    age = st.number_input("Age", min_value=0, max_value=120)
-    length_of_stay = st.number_input("Length of Stay (days)", min_value=0, max_value=365)
-    blood_type = st.selectbox("Blood Type", label_encoders['Blood Type'].classes_, index=0, key="blood_type")
-    medical_condition = st.selectbox("Medical Condition", label_encoders['Medical Condition'].classes_, index=0, key="medical_condition")
-    insurance_provider = st.selectbox("Insurance Provider", label_encoders['Insurance Provider'].classes_, index=0, key="insurance_provider")
-    medication = st.selectbox("Medication", label_encoders['Medication'].classes_, index=0, key="medication")
-    admission_type = st.selectbox("Admission Type", label_encoders['Admission Type'].classes_, index=0, key="admission_type")
-    test_results = st.selectbox("Test Results", label_encoders['Test Results'].classes_, index=0, key="test_results")
-    gender = st.selectbox("Gender", label_encoders['Gender'].classes_, index=0, key="gender")
+    # Adding icons to each dropdown title using HTML or Unicode icons
+    hospital = st.selectbox("🏥 Hospital", label_encoders['Hospital'].classes_, index=0, help="Select the hospital name", key="hospital")
+    age = st.number_input("👶 Age", min_value=0, max_value=120)
+    length_of_stay = st.number_input("📅 Length of Stay (days)", min_value=0, max_value=365)
+    blood_type = st.selectbox("🩸 Blood Type", label_encoders['Blood Type'].classes_, index=0, key="blood_type")
+    medical_condition = st.selectbox("💉 Medical Condition", label_encoders['Medical Condition'].classes_, index=0, key="medical_condition")
+    insurance_provider = st.selectbox("🛡️ Insurance Provider", label_encoders['Insurance Provider'].classes_, index=0, key="insurance_provider")
+    medication = st.selectbox("💊 Medication", label_encoders['Medication'].classes_, index=0, key="medication")
+    admission_type = st.selectbox("🏥 Admission Type", label_encoders['Admission Type'].classes_, index=0, key="admission_type")
+    test_results = st.selectbox("🔬 Test Results", label_encoders['Test Results'].classes_, index=0, key="test_results")
+    gender = st.selectbox("👨‍⚕️ Gender", label_encoders['Gender'].classes_, index=0, key="gender")
 
     # Add a submit button for the form
     submit_button = st.form_submit_button(label="Predict Healthcare Cost")
@@ -97,6 +98,13 @@ st.markdown("""
             Go to GitHub Profile
         </button>
     </a>
+""", unsafe_allow_html=True)
+
+# Smaller Submit Feedback Button
+st.markdown("""
+    <button style="background-color: #56CCF2; color: white; font-size: 14px; padding: 8px 16px; border: none; border-radius: 8px; cursor: pointer;">
+        Submit Feedback
+    </button>
 """, unsafe_allow_html=True)
 
 # Customize app styling (optional)

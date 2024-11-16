@@ -92,7 +92,7 @@ st.markdown("""
 
 # GitHub Link Button with better styling and colors
 if st.button("Visit GitHub Profile"):
-    js = "window.open('https://github.com/KhushiS6', '_blank')"
+    js = window.open('https://github.com/KhushiS6', '_blank')
     st.markdown(f'<a href="javascript:{js}"><button class="stButton">Go to GitHub Profile</button></a>', unsafe_allow_html=True)
 
 # Customize app styling (optional)

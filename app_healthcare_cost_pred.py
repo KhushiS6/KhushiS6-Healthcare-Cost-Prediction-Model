@@ -31,16 +31,16 @@ st.markdown("""
 with st.form("prediction_form"):
     st.subheader("Enter Patient Details")
     
-    hospital = st.selectbox("Hospital", label_encoders['Hospital'].classes_)
+    hospital = st.selectbox("Hospital", label_encoders['Hospital'].classes_, index=0, key="hospital", help="Select the hospital name", format_func=lambda x: x, index_color="lightblue")
     age = st.number_input("Age", min_value=0, max_value=120)
     length_of_stay = st.number_input("Length of Stay (days)", min_value=0, max_value=365)
-    blood_type = st.selectbox("Blood Type", label_encoders['Blood Type'].classes_)
-    medical_condition = st.selectbox("Medical Condition", label_encoders['Medical Condition'].classes_)
-    insurance_provider = st.selectbox("Insurance Provider", label_encoders['Insurance Provider'].classes_)
-    medication = st.selectbox("Medication", label_encoders['Medication'].classes_)
-    admission_type = st.selectbox("Admission Type", label_encoders['Admission Type'].classes_)
-    test_results = st.selectbox("Test Results", label_encoders['Test Results'].classes_)
-    gender = st.selectbox("Gender", label_encoders['Gender'].classes_)
+    blood_type = st.selectbox("Blood Type", label_encoders['Blood Type'].classes_, index=0, key="blood_type", help="Select blood type", index_color="lightgreen")
+    medical_condition = st.selectbox("Medical Condition", label_encoders['Medical Condition'].classes_, index=0, key="medical_condition", help="Select medical condition", index_color="lightcoral")
+    insurance_provider = st.selectbox("Insurance Provider", label_encoders['Insurance Provider'].classes_, index=0, key="insurance_provider", help="Select insurance provider", index_color="lightyellow")
+    medication = st.selectbox("Medication", label_encoders['Medication'].classes_, index=0, key="medication", help="Select medication", index_color="lightblue")
+    admission_type = st.selectbox("Admission Type", label_encoders['Admission Type'].classes_, index=0, key="admission_type", help="Select admission type", index_color="lightgreen")
+    test_results = st.selectbox("Test Results", label_encoders['Test Results'].classes_, index=0, key="test_results", help="Select test results", index_color="lightcoral")
+    gender = st.selectbox("Gender", label_encoders['Gender'].classes_, index=0, key="gender", help="Select gender", index_color="lightyellow")
 
     # Submit button for prediction
     submit_button = st.form_submit_button(label="Predict Healthcare Cost")
@@ -77,6 +77,7 @@ if submit_button:
     
     if st.button("Submit Feedback"):
         if feedback:
+            # Saving the feedback (just showing success for now, it can be extended to store the data)
             st.success("Thank you for your valuable feedback!")
         else:
             st.warning("Please enter some feedback before submitting.")
@@ -84,20 +85,20 @@ if submit_button:
 # Add a section with a button that links to Khushi's GitHub
 st.markdown("## About the Developer 💻")
 st.markdown("""
-    The app is developed by **[Khushi](https://github.com/KhushiS6)**.  
+    The app is developed by **Khushi**.  
     You can find more of her work and contribute to her projects via her GitHub profile.
 """, unsafe_allow_html=True)
 
-# GitHub Link Button with better styling
-if st.button("Go to GitHub Profile"):
+# GitHub Link Button with better styling and colors
+if st.button("Visit GitHub Profile"):
     js = "window.open('https://github.com/KhushiS6', '_blank')"
-    st.markdown(f'<a href="javascript:{js}"><button class="stButton">Visit GitHub</button></a>', unsafe_allow_html=True)
+    st.markdown(f'<a href="javascript:{js}"><button class="stButton">Go to GitHub Profile</button></a>', unsafe_allow_html=True)
 
 # Customize app styling (optional)
 st.markdown(
     """
     <style>
-    /* Styling the 'Visit GitHub' button */
+    /* Styling the 'Go to GitHub' button */
     .stButton {
         background-color: #2D9CDB;
         color: white;
